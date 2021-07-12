@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "webpack --env development --progress",
+    "build:pre": "webpack --env production pre --progress",
     "build:pro": "webpack --env production --progress",
-    "serve": "webpack serve --env development --progress"
+    "serve": "webpack serve --env development serve --progress"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,8 @@
     "progress-bar-webpack-plugin": "^2.1.0",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
