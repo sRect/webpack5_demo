@@ -3,6 +3,7 @@ const webpack = require('webpack');
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
@@ -46,17 +47,26 @@ module.exports = {
           {
             loader: 'css-loader',
             // 解决 css 命名混乱和冲突
-            options: isDev ? {} : {
+            options: isDev ? {
+              importLoaders: 2
+            } : {
+              // 意思是，如果在css中引入(@import)了其他文件css,而这个css文件中引入了less,将用less-loader处理
+              importLoaders: 2,
               modules: {
                 compileType: "module",
                 localIdentName: "[path][name]__[local]--[hash:base64:5]",
               },
             },
           }, 
+          'postcss-loader',
           'less-loader',
-          'postcss-loader'
         ],
         exclude: /node_modules/,
+      },
+      // https://webpack.docschina.org/guides/asset-modules/
+      {
+        test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
+        type: 'asset',
       },
     ],
   },
@@ -68,6 +78,12 @@ module.exports = {
       filename: "index.html",
       template: path.resolve(rootDir, "public/index.html"),
     }),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(rootDir, 'public/static'), //要打包的静态资源目录地址
+        to: path.resolve(rootDir, 'dist/static')
+      }]
+    }),,
     new ProgressBarPlugin({
       format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
       clear: false
