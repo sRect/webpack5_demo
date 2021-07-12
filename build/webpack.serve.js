@@ -1,11 +1,12 @@
 const path = require('path');
+const rootDir = process.cwd();
 
 module.exports = {
   mode: "development",
   devtool: "eval-cheap-module-source-map",
   // https://webpack.docschina.org/configuration/dev-server/#root
   devServer: {
-    contentBase: path.resolve(__dirname, "../dist"),
+    contentBase: path.resolve(rootDir, "dist"),
     port: 9000,
     host: "localhost",
     compress: true,

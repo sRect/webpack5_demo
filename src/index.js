@@ -1,13 +1,23 @@
 // import { a, double } from "@/a";
 import '@/App';
+import '@/index.less';
 
 class Foo {
   constructor() {
     this.count = 1;
+
+    this.createHello();
   }
 
   get double() {
     return this.count * 2;
+  }
+
+  createHello() {
+    const div = document.createElement('div')
+    div.className = 'hello'
+    div.innerHTML = 'hello'
+    document.body.appendChild(div);
   }
 
   increment() {
