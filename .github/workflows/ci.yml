@@ -29,11 +29,11 @@ jobs:
 
       # 安装依赖
       - name: install
-        run: npm run install
+        run: npm install
 
       # 打包
       - name: build
-        run: npm run build:pro
+        run: npm build:pro
 
       # 部署到gh-pages分支
       - name: deploy
