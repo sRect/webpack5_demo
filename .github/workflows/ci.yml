@@ -33,7 +33,9 @@ jobs:
 
       # 打包
       - name: build
-        run: npm run build:pro
+        run: |
+          npm run build:pro
+          cp dist/index.html
 
       # 部署到gh-pages分支
       - name: deploy
