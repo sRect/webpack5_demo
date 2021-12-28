@@ -21,7 +21,7 @@ module.exports = {
   output: {
     path: path.resolve(rootDir, "dist"),
     filename: "[name].[fullhash:8].js",
-    publicPath: "/",
+    publicPath: isDev ? "/" : "webpack5_demo",
     // webpack5.20.0+已经不需要使用clean-webpack-plugin了，output.clean可以清除输出目录
     clean: true,
   },
