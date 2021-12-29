@@ -45,3 +45,12 @@ jobs:
           build_dir: dist
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      # 制作docker镜像并推送到docker hub
+      - name: build and push image to docker hub
+        run: |
+          echo "build and push start==>"
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+          docker image build -t blog:latest .
+          docker tag blog:latest srect/blog:latest
+          docker push srect/blog:latest
