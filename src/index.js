@@ -1,7 +1,7 @@
 // import { a, double } from "@/a";
-import '@/App';
-import '@/index.less';
-import testImg from '@/Img/test.jpg';
+import "@/App";
+import "@/index.less";
+import testImg from "@/Img/test.jpg";
 
 class Foo {
   constructor() {
@@ -16,32 +16,32 @@ class Foo {
   }
 
   createHello() {
-    const div = document.createElement('div');
-    div.className = 'hello';
-    div.innerHTML = 'hello';
+    const div = document.createElement("div");
+    div.className = "hello";
+    div.innerHTML = "hello!!!";
     document.body.appendChild(div);
   }
 
   createImg() {
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = testImg;
     document.body.appendChild(img);
   }
 
   increment() {
-    this.count+=1;
+    this.count += 1;
   }
 
   decrement() {
-    this.count-=1;
+    this.count -= 1;
   }
 
   async asyncIncrement() {
     const count = await new Proimise((resolve) => {
       setTimeout(() => resolve(1), 500);
     });
-    
-    this.count+=count;
+
+    this.count += count;
   }
 }
 const foo = new Foo();
