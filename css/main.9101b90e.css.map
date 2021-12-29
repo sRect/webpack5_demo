@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://webpack5-demo/./src/index.less"],"names":[],"mappings":"AAAA,KACE,cACF,CAFA,8BAOI,qBADA,sBADA,mEADA,aADA,WAMJ","file":"css/main.9101b90e.css","sourcesContent":["body {\n  font-size: 18px;\n  .hello {\n    width: 100px;\n    height: 100px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n    background-color: red;\n  }\n}"],"sourceRoot":""}
