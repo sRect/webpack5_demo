@@ -54,3 +54,33 @@ jobs:
           docker image build -t blog:latest .
           docker tag blog:latest srect/blog:latest
           docker push srect/blog:latest
+
+      # 登录远程服务器，拉取镜像，制作并重启容器
+      # https://github.com/marketplace/actions/remote-ssh-commands
+      - name: ssh deploy
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd /
+            echo -e "1.docker login start==>"
+            docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+            echo -e "2.docker stop container==>"
+            docker container stop webpack5
+
+            echo -e "3.docker conatainer rm==>"
+            docker container rm webpack5
+
+            echo -e "4.docker image rm==>"
+            docker image rm srect/blog:latest
+
+            echo -e "5.docker hub pull image==>"
+            docker pull srect/blog:latest
+
+            echo -e "6.docker container create and start==>"
+            docker container run -d -p 8000:80 --name webpack5 srect/blog:latest
+
+            echo -e "7.deploy success==>"
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          pass: ${{ secrets.PASSWORD }}
